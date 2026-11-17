@@ -18,33 +18,42 @@ public final class TestPerformance {
      * Program entry point.
      */
     public static void main() {
+        
         /*
          * Set up the data structures
          */
+
         final Set<String> set = new TreeSet<>();
+        int k=0;
+
         /*
          * Prepare a variable for measuring time
          */
-        long time = System.nanoTime();
-        /*
-         * Run the benchmark
-         */
-        for (int i = 1; i <= ELEMS; i++) {
-            set.add(Integer.toString(i));
+
+        while(k<=4){
+         long time = System.nanoTime();
+            /*
+            * Run the benchmark
+            */
+            for (int i = 1; i <= ELEMS; i++) {
+             set.add(Integer.toString(i));
+                }
+            /*
+                * Compute the time and print result
+            */
+            time = System.nanoTime() - time;
+            final var millis = TimeUnit.NANOSECONDS.toMillis(time);
+            IO.println(
+             "Converting "
+                    + set.size()
+                    + " ints to String and inserting them in a Set took "
+                    + time
+                    + "ns ("
+                    + millis
+                    + "ms)"
+            );
+            k++;
         }
-        /*
-         * Compute the time and print result
-         */
-        time = System.nanoTime() - time;
-        final var millis = TimeUnit.NANOSECONDS.toMillis(time);
-        IO.println(
-            "Converting "
-                + set.size()
-                + " ints to String and inserting them in a Set took "
-                + time
-                + "ns ("
-                + millis
-                + "ms)"
-        );
+        
     }
 }
